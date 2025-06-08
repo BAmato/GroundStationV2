@@ -9,6 +9,8 @@
 #include "commands/Autos.h"
 #include "commands/ExampleCommand.h"
 
+MotorSubsystem& RobotContainer::GetMotorSubsystem() { return m_motorSubsystem; }
+
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
 

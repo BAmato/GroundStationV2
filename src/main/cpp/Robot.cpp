@@ -5,6 +5,7 @@
 #include "Robot.h"
 
 #include <frc2/command/CommandScheduler.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 Robot::Robot() {}
 
@@ -61,7 +62,14 @@ void Robot::TeleopPeriodic() {}
 /**
  * This function is called periodically during test mode.
  */
-void Robot::TestPeriodic() {}
+void Robot::TestInit() {
+  m_container.GetMotorSubsystem().ResetEncoder();
+}
+
+void Robot::TestPeriodic() {
+  double pos = m_container.GetMotorSubsystem().GetEncoderPosition();
+  frc::SmartDashboard::PutNumber("Antenna Encoder", pos);
+}
 
 /**
  * This function is called once when the robot is first started up.
