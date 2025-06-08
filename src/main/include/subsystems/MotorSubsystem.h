@@ -1,6 +1,6 @@
 #pragma once
 
-#include <frc/PWMVictorSPX.h>
+#include <frc/motorcontrol/PWMVictorSPX.h>
 #include <frc/Encoder.h>
 #include <frc2/command/SubsystemBase.h>
 
