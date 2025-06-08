@@ -19,3 +19,9 @@ namespace OperatorConstants {
 inline constexpr int kDriverControllerPort = 0;
 
 }  // namespace OperatorConstants
+
+namespace MotorConstants {
+inline constexpr int kMotorPWMPin = 0;
+inline constexpr int kEncoderChannelA = 0;
+inline constexpr int kEncoderChannelB = 1;
+}  // namespace MotorConstants
