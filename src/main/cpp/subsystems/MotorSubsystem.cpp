@@ -31,7 +31,6 @@ void MotorSubsystem::MoveToAngle(double angleDeg, double speedPercent) {
 void MotorSubsystem::StopMotor() {
   m_motor.StopMotor();
 }
-
 double MotorSubsystem::GetCurrentDraw() const {
   return m_pdp.GetCurrent(MotorConstants::kPDPChannel);
 }

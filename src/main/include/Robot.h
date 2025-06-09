@@ -9,7 +9,6 @@
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
 #include <networktables/GenericEntry.h>
-
 #include "RobotContainer.h"
 
 class Robot : public frc::TimedRobot {

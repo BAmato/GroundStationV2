@@ -96,6 +96,7 @@ void Robot::TestPeriodic() {
   if (m_encoderEntry) {
     m_encoderEntry->SetDouble(pos);
   }
+
   if (m_currentEntry) {
     m_currentEntry->SetDouble(m_container.GetMotorSubsystem().GetCurrentDraw());
   }
