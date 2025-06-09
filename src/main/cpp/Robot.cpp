@@ -5,7 +5,9 @@
 #include "Robot.h"
 
 #include <frc2/command/CommandScheduler.h>
-#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/shuffleboard/BuiltInWidgets.h>
+#include <cmath>
 
 Robot::Robot() {}
 
@@ -64,11 +66,43 @@ void Robot::TeleopPeriodic() {}
  */
 void Robot::TestInit() {
   m_container.GetMotorSubsystem().ResetEncoder();
+  auto& tab = frc::Shuffleboard::GetTab("Test");
+
+  m_runEntry =
+      tab.Add("Run Motor Test", false)
+          .WithWidget(frc::BuiltInWidgets::kToggleButton)
+          .GetEntry();
+  m_targetEntry =
+      tab.Add("Target Angle", 45.0)
+          .WithWidget(frc::BuiltInWidgets::kTextView)
+          .GetEntry();
+  m_speedEntry =
+      tab.Add("Motor Speed %", 0.1)
+          .WithWidget(frc::BuiltInWidgets::kTextView)
+          .GetEntry();
+  m_encoderEntry =
+      tab.Add("Antenna Encoder", 0.0)
+          .WithWidget(frc::BuiltInWidgets::kNumberBar)
+          .GetEntry();
 }
 
 void Robot::TestPeriodic() {
   double pos = m_container.GetMotorSubsystem().GetEncoderPosition();
-  frc::SmartDashboard::PutNumber("Antenna Encoder", pos);
+  m_encoderEntry.SetDouble(pos);
+
+  bool run = m_runEntry.GetBoolean(false);
+  double target = m_targetEntry.GetDouble(45.0);
+  double speed = m_speedEntry.GetDouble(0.1);
+
+  if (run) {
+    if (std::abs(target - pos) <= 1.0) {
+      m_container.GetMotorSubsystem().StopMotor();
+    } else {
+      m_container.GetMotorSubsystem().MoveToAngle(target, speed);
+    }
+  } else {
+    m_container.GetMotorSubsystem().StopMotor();
+  }
 }
 
 /**

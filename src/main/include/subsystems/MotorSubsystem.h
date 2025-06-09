@@ -10,6 +10,8 @@ class MotorSubsystem : public frc2::SubsystemBase {
 
   double GetEncoderPosition() const;
   void ResetEncoder();
+  void MoveToAngle(double angleDeg, double speedPercent);
+  void StopMotor();
 
  private:
   frc::PWMVictorSPX m_motor;
