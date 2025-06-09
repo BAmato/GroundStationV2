@@ -85,12 +85,20 @@ void Robot::TestInit() {
       tab.Add("Antenna Encoder", 0.0)
           .WithWidget(frc::BuiltInWidgets::kNumberBar)
           .GetEntry();
+  m_currentEntry =
+      tab.Add("Motor Current", 0.0)
+          .WithWidget(frc::BuiltInWidgets::kNumberBar)
+          .GetEntry();
 }
 
 void Robot::TestPeriodic() {
   double pos = m_container.GetMotorSubsystem().GetEncoderPosition();
   if (m_encoderEntry) {
     m_encoderEntry->SetDouble(pos);
+  }
+
+  if (m_currentEntry) {
+    m_currentEntry->SetDouble(m_container.GetMotorSubsystem().GetCurrentDraw());
   }
 
   bool run = m_runEntry ? m_runEntry->GetBoolean(false) : false;

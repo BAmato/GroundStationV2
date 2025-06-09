@@ -9,8 +9,6 @@
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
 #include <networktables/GenericEntry.h>
-#include <networktables/NetworkTableEntry.h>
-
 #include "RobotContainer.h"
 
 class Robot : public frc::TimedRobot {
@@ -39,4 +37,5 @@ class Robot : public frc::TimedRobot {
   nt::GenericEntry* m_runEntry = nullptr;
   nt::GenericEntry* m_targetEntry = nullptr;
   nt::GenericEntry* m_speedEntry = nullptr;
+  nt::GenericEntry* m_currentEntry = nullptr;
 };
