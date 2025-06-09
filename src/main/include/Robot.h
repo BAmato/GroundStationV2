@@ -8,6 +8,7 @@
 
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
+#include <networktables/GenericEntry.h>
 
 #include "RobotContainer.h"
 
@@ -32,4 +33,10 @@ class Robot : public frc::TimedRobot {
   std::optional<frc2::CommandPtr> m_autonomousCommand;
 
   RobotContainer m_container;
+
+  nt::GenericEntry* m_encoderEntry = nullptr;
+  nt::GenericEntry* m_runEntry = nullptr;
+  nt::GenericEntry* m_targetEntry = nullptr;
+  nt::GenericEntry* m_speedEntry = nullptr;
+  nt::GenericEntry* m_currentEntry = nullptr;
 };

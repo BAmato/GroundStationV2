@@ -24,4 +24,5 @@ namespace MotorConstants {
 inline constexpr int kMotorPWMPin = 0;
 inline constexpr int kEncoderChannelA = 0;
 inline constexpr int kEncoderChannelB = 1;
+inline constexpr int kPDPChannel = 0;
 }  // namespace MotorConstants
