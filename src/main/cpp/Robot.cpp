@@ -7,6 +7,7 @@
 #include <frc2/command/CommandScheduler.h>
 #include <frc/shuffleboard/Shuffleboard.h>
 #include <frc/shuffleboard/BuiltInWidgets.h>
+#include <networktables/GenericEntry.h>
 #include <cmath>
 
 Robot::Robot() {}
@@ -88,11 +89,13 @@ void Robot::TestInit() {
 
 void Robot::TestPeriodic() {
   double pos = m_container.GetMotorSubsystem().GetEncoderPosition();
-  m_encoderEntry.SetDouble(pos);
+  if (m_encoderEntry) {
+    m_encoderEntry->SetDouble(pos);
+  }
 
-  bool run = m_runEntry.GetBoolean(false);
-  double target = m_targetEntry.GetDouble(45.0);
-  double speed = m_speedEntry.GetDouble(0.1);
+  bool run = m_runEntry ? m_runEntry->GetBoolean(false) : false;
+  double target = m_targetEntry ? m_targetEntry->GetDouble(45.0) : 45.0;
+  double speed = m_speedEntry ? m_speedEntry->GetDouble(0.1) : 0.1;
 
   if (run) {
     if (std::abs(target - pos) <= 1.0) {
