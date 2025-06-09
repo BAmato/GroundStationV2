@@ -6,6 +6,7 @@
 
 #include <frc2/command/CommandScheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <cmath>
 
 Robot::Robot() {}
 
@@ -64,11 +65,28 @@ void Robot::TeleopPeriodic() {}
  */
 void Robot::TestInit() {
   m_container.GetMotorSubsystem().ResetEncoder();
+  frc::SmartDashboard::PutBoolean("Run Motor Test", false);
+  frc::SmartDashboard::PutNumber("Target Angle", 45.0);
+  frc::SmartDashboard::PutNumber("Motor Speed %", 0.1);
 }
 
 void Robot::TestPeriodic() {
   double pos = m_container.GetMotorSubsystem().GetEncoderPosition();
   frc::SmartDashboard::PutNumber("Antenna Encoder", pos);
+
+  bool run = frc::SmartDashboard::GetBoolean("Run Motor Test", false);
+  double target = frc::SmartDashboard::GetNumber("Target Angle", 45.0);
+  double speed = frc::SmartDashboard::GetNumber("Motor Speed %", 0.1);
+
+  if (run) {
+    if (std::abs(target - pos) <= 1.0) {
+      m_container.GetMotorSubsystem().StopMotor();
+    } else {
+      m_container.GetMotorSubsystem().MoveToAngle(target, speed);
+    }
+  } else {
+    m_container.GetMotorSubsystem().StopMotor();
+  }
 }
 
 /**
